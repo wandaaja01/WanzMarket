@@ -6,9 +6,7 @@
   <title>Wanz Market - Wanz Official Website</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to bottom right, #0f172a, #1e3a8a);
@@ -148,7 +146,7 @@
 <div id="historyModal" class="modal">
   <div class="modal-content" style="max-height: 70vh; overflow-y: auto;">
     <h3 style="margin-bottom:10px; color: #38bdf8;">Riwayat Feedback</h3>
-    <div id="feedbackHistoryText" style="white-space: pre-wrap; font-size: 13px; color: #e2e8f0;"></div>
+    <div id="feedbackHistoryText" style="font-size: 13px; color: #e2e8f0;"></div>
     <button onclick="closeHistoryModal()" style="margin-top:15px;">Tutup</button>
   </div>
 </div>
@@ -217,22 +215,24 @@
           body: formData
         });
       }
-  showAlert("Feedback berhasil dikirim!");
-  modal.style.display = 'none';
 
-  const old = localStorage.getItem('wanz_feedback') || '';
-  const newFormat = format.trim(); // pastikan tidak ada spasi ekstra
-  const combined = (old ? old + "\n\n" : "") + newFormat;
+      showAlert("Feedback berhasil dikirim!");
+      modal.style.display = 'none';
 
-  localStorage.setItem('wanz_feedback', combined);
-} catch (e) {
-  showAlert("Gagal mengirim!");
-  }
+      const old = localStorage.getItem('wanz_feedback') || '';
+      const newFormat = format.trim();
+      const combined = (old ? old + "\n\n" : "") + newFormat;
+      localStorage.setItem('wanz_feedback', combined);
+
+    } catch (e) {
+      showAlert("Gagal mengirim!");
+    }
   }
 
   function showHistoryModal() {
     const data = localStorage.getItem('wanz_feedback') || 'Belum ada feedback.';
-    document.getElementById('feedbackHistoryText').textContent = data;
+    const formatted = data.replace(/\n/g, '<br>');
+    document.getElementById('feedbackHistoryText').innerHTML = formatted;
     document.getElementById('historyModal').style.display = 'flex';
   }
 
