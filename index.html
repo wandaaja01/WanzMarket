@@ -220,7 +220,7 @@
       showAlert("Feedback berhasil dikirim!");
       modal.style.display = 'none';
       const old = localStorage.getItem('wanz_feedback') || '';
-      localStorage.setItem('wanz_feedback', old + "\\n\\n" + format);
+      localStorage.setItem('wanz_feedback', old + "\n\n" + format);
     } catch (e) {
       showAlert("Gagal mengirim!");
     }
