@@ -217,13 +217,17 @@
           body: formData
         });
       }
-      showAlert("Feedback berhasil dikirim!");
-      modal.style.display = 'none';
-      const old = localStorage.getItem('wanz_feedback') || '';
-      localStorage.setItem('wanz_feedback', old + "\n\n" + format);
-    } catch (e) {
-      showAlert("Gagal mengirim!");
-    }
+  showAlert("Feedback berhasil dikirim!");
+  modal.style.display = 'none';
+
+  const old = localStorage.getItem('wanz_feedback') || '';
+  const newFormat = format.trim(); // pastikan tidak ada spasi ekstra
+  const combined = (old ? old + "\n\n" : "") + newFormat;
+
+  localStorage.setItem('wanz_feedback', combined);
+} catch (e) {
+  showAlert("Gagal mengirim!");
+  }
   }
 
   function showHistoryModal() {
